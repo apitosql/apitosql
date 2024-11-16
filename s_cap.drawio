@@ -1,0 +1,80 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36" version="24.8.6">
+  <diagram name="Page-1" id="pDONEKcWr-MKWI-kgwXX">
+    <mxGraphModel dx="1026" dy="623" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="mOKeRrlAzi2eNXkoqTf--11" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="3" target="mOKeRrlAzi2eNXkoqTf--12" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="404" y="143" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="3" value="NETWORK RULE" style="rounded=1;arcSize=40;strokeWidth=2" parent="1" vertex="1">
+          <mxGeometry x="341" y="14" width="126" height="49" as="geometry" />
+        </mxCell>
+        <mxCell id="5" value="Declare network rule" style="curved=1;startArrow=none;endArrow=block;entryX=0;entryY=0.49;" parent="1" source="mOKeRrlAzi2eNXkoqTf--6" target="3" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+            <mxPoint x="136" y="38.00999999999999" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6" value="" style="curved=1;startArrow=none;endArrow=block;exitX=1;exitY=0.49;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="3" target="mOKeRrlAzi2eNXkoqTf--9" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+            <mxPoint x="591" y="38" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="mOKeRrlAzi2eNXkoqTf--7" value="Auto Generated" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="6" vertex="1" connectable="0">
+          <mxGeometry x="-0.0484" y="1" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="mOKeRrlAzi2eNXkoqTf--16" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="mOKeRrlAzi2eNXkoqTf--6" target="mOKeRrlAzi2eNXkoqTf--15" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="mOKeRrlAzi2eNXkoqTf--17" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="mOKeRrlAzi2eNXkoqTf--6" target="mOKeRrlAzi2eNXkoqTf--15" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="mOKeRrlAzi2eNXkoqTf--6" value="User" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" parent="1" vertex="1">
+          <mxGeometry x="150" y="7" width="30" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="mOKeRrlAzi2eNXkoqTf--9" value="EXTERNAL ACCESS INTEGRATION" style="rounded=1;arcSize=40;strokeWidth=2" parent="1" vertex="1">
+          <mxGeometry x="590" y="14" width="260" height="46" as="geometry" />
+        </mxCell>
+        <mxCell id="mOKeRrlAzi2eNXkoqTf--12" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;URL white list&lt;/h1&gt;&lt;p&gt;This object does not effect anything directly. It can be accepted as ruleset&lt;/p&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="314" y="130" width="180" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="mOKeRrlAzi2eNXkoqTf--13" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;API integration&lt;/h1&gt;&lt;p&gt;This object will be used for connection external API&amp;nbsp;&lt;/p&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="620" y="130" width="180" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="mOKeRrlAzi2eNXkoqTf--14" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.556;entryY=0.091;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="mOKeRrlAzi2eNXkoqTf--9" target="mOKeRrlAzi2eNXkoqTf--13" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="mOKeRrlAzi2eNXkoqTf--15" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;User&lt;/h1&gt;&lt;div&gt;He can be DA, DE or DS who connect external API and use data in Snowflake.&amp;nbsp;&lt;/div&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="75" y="130" width="180" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="GIpL5xaJyaI5WLH2NYrI-7" value="" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="57" y="270" width="770" height="480" as="geometry" />
+        </mxCell>
+        <mxCell id="GIpL5xaJyaI5WLH2NYrI-8" value="Native APP" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="80" y="280" width="80" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="GIpL5xaJyaI5WLH2NYrI-9" value="APP database" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" vertex="1" parent="1">
+          <mxGeometry x="150" y="280" width="90" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="GIpL5xaJyaI5WLH2NYrI-10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" target="GIpL5xaJyaI5WLH2NYrI-9">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="385" y="240" as="sourcePoint" />
+            <mxPoint x="290" y="345" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="385" y="345" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GIpL5xaJyaI5WLH2NYrI-11" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;User defined Network Rule&lt;/h1&gt;&lt;p&gt;It will be stored as object in Native APP database which will be isolated.&amp;nbsp;&lt;/p&gt;&lt;p&gt;Consumer: Consumer will be API integration object&lt;/p&gt;&lt;p&gt;Can be: CRUD&lt;/p&gt;&lt;p&gt;By: User&lt;/p&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="255" y="360" width="190" height="220" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
