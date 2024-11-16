@@ -1,48 +1,41 @@
-CREATE OR REPLACE PROCEDURE create_external_access_integration(
-    integration_name STRING,
-    type STRING DEFAULT 'EXTERNAL',
-    external_oauth_any_role_mode STRING DEFAULT NULL,
-    allowed_oauth_uris ARRAY DEFAULT NULL,
-    allowed_vpc_ids ARRAY DEFAULT NULL,
-    allowed_account_ids ARRAY DEFAULT NULL,
-    allowed_azure_storage_uris ARRAY DEFAULT NULL,
-    enabled BOOLEAN DEFAULT TRUE,
-    comment STRING DEFAULT NULL
+USE DATABASE capybara;
+
+CREATE OR REPLACE PROCEDURE create_network_rule(
+    rule_name STRING,                     -- Name of the network rule
+    mode STRING ,         -- Network rule mode (e.g., 'EGRESS')
+    type STRING,      -- Type of network rule (e.g., 'HOST_PORT')
+    value_list STRING,                    -- List of values (e.g., hostnames, IPs, etc.)
+    comment STRING DEFAULT NULL           -- Optional comment
 )
 RETURNS STRING
 LANGUAGE JAVASCRIPT
 EXECUTE AS CALLER
 AS
 $$
-    // Start building the DDL statement
-    let ddl = `CREATE EXTERNAL ACCESS INTEGRATION ${integration_name} TYPE = ${type}`;
-    
-    if (external_oauth_any_role_mode) {
-        ddl += ` EXTERNAL_OAUTH_ANY_ROLE_MODE = '${external_oauth_any_role_mode}'`;
+    // Access parameters via the 'arguments' array
+    let rule_name = arguments[0];
+    let mode = arguments[1];
+    let type = arguments[2];
+    let value_list = arguments[3];
+    let comment = arguments[4];
+
+    // Verify the mode and type to avoid invalid values
+    let ruleMode = (mode === 'EGRESS' || mode === 'INGRESS') ? mode : 'EGRESS';
+    let ruleType = (type === 'HOST_PORT' || type === 'ANOTHER_VALID_TYPE') ? type : 'HOST_PORT';
+
+    // Start building the DDL statement for NETWORK RULE
+    let ddl = `CREATE NETWORK RULE ${rule_name} MODE = ${ruleMode} TYPE = ${ruleType}`;
+
+    // Add the value list (ensure it's a comma-separated list of values)
+    if (value_list) {
+        ddl += ` VALUE_LIST = (${value_list.split(',').map(value => `'${value.trim()}'`).join(", ")})`;
     }
-    
-    if (allowed_oauth_uris && allowed_oauth_uris.length > 0) {
-        ddl += ` ALLOWED_OAUTH_URIS = (${allowed_oauth_uris.map(uri => `'${uri}'`).join(", ")})`;
-    }
-    
-    if (allowed_vpc_ids && allowed_vpc_ids.length > 0) {
-        ddl += ` ALLOWED_VPC_IDS = (${allowed_vpc_ids.map(vpc_id => `'${vpc_id}'`).join(", ")})`;
-    }
-    
-    if (allowed_account_ids && allowed_account_ids.length > 0) {
-        ddl += ` ALLOWED_ACCOUNT_IDS = (${allowed_account_ids.map(account_id => `'${account_id}'`).join(", ")})`;
-    }
-    
-    if (allowed_azure_storage_uris && allowed_azure_storage_uris.length > 0) {
-        ddl += ` ALLOWED_AZURE_STORAGE_URIS = (${allowed_azure_storage_uris.map(uri => `'${uri}'`).join(", ")})`;
-    }
-    
-    ddl += ` ENABLED = ${enabled ? 'TRUE' : 'FALSE'}`;
-    
+
+    // Add comment if provided
     if (comment) {
         ddl += ` COMMENT = '${comment}'`;
     }
-    
+
     ddl += ";";
 
     // Execute the generated DDL statement
@@ -53,9 +46,10 @@ $$
 $$;
 
 -- Usage
-CALL create_external_access_integration(
-    'MY_EXTERNAL_ACCESS_INTEGRATION',
-    'HOST_PORT',
-    NULL,
-    ARRAY_CONSTRUCT('jsonplaceholder.typicode.com')
+CALL create_network_rule(
+    'typicode_maps_network_rule_1',         -- rule_name
+    'EGRESS',                              -- mode (e.g., 'EGRESS')
+    'HOST_PORT',                           -- type (e.g., 'HOST_PORT')
+    'jsonplaceholder.typicode.com',        -- value_list (comma-separated if multiple)
+    'This is a test network rule'          -- comment (optional)
 );
