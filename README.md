@@ -15,4 +15,4 @@ Here are some ideas to get you started:
 - ⚡ Fun fact: ...
 -->
 
-![Alt text](https://github.com/apitosql/apitosql/blob/main/s_cap_1.drawio%20(1).png)
+![Alt text](https://github.com/apitosql/apitosql/blob/main/imgs/s_cap_1.drawio%20(1).png)
