@@ -1,11 +1,28 @@
--- This is the setup script that runs while installing a Snowflake Native App in a consumer account.
--- To write this script, you can familiarize yourself with some of the following concepts:
--- Application Roles
--- Versioned Schemas
--- UDFs/Procs
--- Extension Code
--- Refer to https://docs.snowflake.com/en/developer-guide/native-apps/creating-setup-script for a detailed understanding of this file.
 
-CREATE OR ALTER VERSIONED SCHEMA core;
+CREATE APPLICATION ROLE IF NOT EXISTS app_public;
+CREATE SCHEMA IF NOT EXISTS core;
+GRANT USAGE ON SCHEMA core TO APPLICATION ROLE app_public;
 
--- The rest of this script is left blank for purposes of your learning and exploration.
+
+CREATE OR ALTER VERSIONED SCHEMA code_schema;
+GRANT USAGE ON SCHEMA code_schema TO APPLICATION ROLE app_public;
+
+CREATE OR REPLACE PROCEDURE code_schema.init_app(config variant)
+  RETURNS string
+  LANGUAGE python
+  runtime_version = '3.8'
+  packages = ('snowflake-snowpark-python', 'requests', 'simplejson')
+  imports = ('/src/script.py')
+  handler = 'script.init_app';
+
+GRANT USAGE ON PROCEDURE code_schema.init_app(variant) TO APPLICATION ROLE app_public;
+
+CREATE OR REPLACE FUNCTION code_schema.api_to_sql()
+  RETURNS string
+  LANGUAGE python
+  runtime_version = '3.8'
+  packages = ('snowflake-snowpark-python', 'requests', 'simplejson')
+  imports = ('/src/script.py')
+  handler = 'script.api_to_sql';
+
+GRANT USAGE ON FUNCTION code_schema.api_to_sql() TO APPLICATION ROLE app_public;

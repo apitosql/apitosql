@@ -1,8 +1,28 @@
-# This is a manifest.yml file, a required component of creating a Snowflake Native App.
-# This file defines properties required by the application package, including the location of the setup script and version definitions.
-# Refer to https://docs.snowflake.com/en/developer-guide/native-apps/creating-manifest for a detailed understanding of this file.
-
 manifest_version: 1
 artifacts:
   setup_script: setup_script.sql
   readme: README.md
+privileges:
+  - EXECUTE TASK:
+      description: "Run ingestion tasks for replicating Redshift data"
+  - EXECUTE MANAGED TASK:
+      description: "To run serverless ingestion tasks for replicating Redshift data"
+  - CREATE WAREHOUSE:
+      description: "To create warehouses for executing tasks"
+  - MANAGE WAREHOUSES:
+      description: "To manage warehouses for optimizing the efficiency of your accounts"
+  - CREATE DATABASE:
+      description: "To create sink databases for replicating Redshift data"
+  - IMPORTED PRIVILEGES ON SNOWFLAKE DB:
+      description: "To access account_usage views"
+  - READ SESSION:
+      description: "To allow Streamlit to access some context functions"
+references:
+  - EXTERNAL_ACCESS_REFERENCE:
+      label: "Coincap Access Integration"
+      description: "This EAI is required to access the api.coincap.io API"
+      privileges:
+        - USAGE
+      object_type: EXTERNAL ACCESS INTEGRATION
+      register_callback: core.register_single_callback
+      configuration_callback: core.get_configuration
