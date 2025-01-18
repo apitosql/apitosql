@@ -88,3 +88,58 @@ SELECT * FROM TABLE(CAPYBARA.PUBLIC.api_json_to_flatten());
 ## License 📝
 
 ...
+
+
+## Deployment Guide 🚀
+
+### Prerequisites
+- Snowflake account
+- Snowflake CLI installed
+
+### 1. Install Snowflake CLI
+```bash
+# For macOS (using Homebrew)
+brew install --cask snowflake-cli
+```
+
+### 2. Configure Snowflake Connection
+```bash
+mkdir -p ~/.snowflake
+touch ~/.snowflake/config.toml
+```
+
+Add Connection Details to config.toml
+
+Edit the config.toml file with the following Snowflake connection details:
+
+account = "ZQ72407"
+
+host = "jrzozaq-capybara_dev.snowflakecomputing.com"
+
+user = "CAPYBARA"
+
+password = "lickurass"
+
+organization = "JRZOZAQ"
+
+role = "ACCOUNTADMIN"
+
+warehouse = "CAPYBARA"
+
+database = "CAPYBARA"
+
+
+### 3. Test the Connection
+Once the configuration is complete, test the Snowflake connection:
+
+```bash
+snow connection test -c capybara
+```
+
+
+### 4. Run Snowflake Application
+To run a Snowflake application with the configured connection:
+
+```bash
+snow app run -c capybara
+```
