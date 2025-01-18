@@ -34,7 +34,9 @@ create or replace TABLE core.CONN_METADATA (
 	"page_num_field" VARCHAR(16777216)
 );
 
-GRANT USAGE ON TABLE core.CONN_METADATA TO APPLICATION ROLE app_public;
+-- GRANT USAGE ON TABLE core.CONN_METADATA TO APPLICATION ROLE app_public;
+GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE core.CONN_METADATA TO APPLICATION ROLE app_public;
+
 
 create or replace TABLE core.API_RUN_META (
 	CONFIG_ID VARCHAR(36) NOT NULL DEFAULT UUID_STRING(),
@@ -44,18 +46,20 @@ create or replace TABLE core.API_RUN_META (
 	IS_LOADED BOOLEAN
 );
 
-GRANT USAGE ON TABLE core.API_RUN_META TO APPLICATION ROLE app_public;
+-- GRANT USAGE ON TABLE core.API_RUN_META TO APPLICATION ROLE app_public;
+GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE core.API_RUN_META TO APPLICATION ROLE app_public;
 
 
 CREATE OR REPLACE PROCEDURE core.create_source(config_name string, base_url string, secret_token string, api_params_str string, headers_str string)
 RETURNS string
 LANGUAGE PYTHON
 RUNTIME_VERSION = '3.8' -- Or your desired runtime version
-HANDLER = 'main' -- The entry point function in your Python code
+HANDLER = 'create_source.main' -- The entry point function in your Python code
 PACKAGES = ('snowflake-snowpark-python', 'pandas')
-IMPORTS = ('/sp/setup/get_general.py/create_source.py') ;
+IMPORTS = ('/setup/create_source.py');
 
-GRANT USAGE ON PROCEDURE core.get_general create_source(config_name string, base_url string, secret_token string, api_params_str string, headers_str string) TO APPLICATION ROLE app_public;
+-- GRANT USAGE ON PROCEDURE core.get_general create_source(config_name string, base_url string, secret_token string, api_params_str string, headers_str string) TO APPLICATION ROLE app_public;
+GRANT USAGE ON PROCEDURE core.create_source(STRING, STRING, STRING, STRING, STRING) TO APPLICATION ROLE app_public;
 
 
 CREATE OR REPLACE PROCEDURE core.get_general ( sql_code string)
@@ -64,7 +68,8 @@ LANGUAGE PYTHON
 RUNTIME_VERSION = '3.8' -- Or your desired runtime version
 HANDLER = 'get_general.main' -- The entry point function in your Python code
 PACKAGES = ('snowflake-snowpark-python', 'pandas')
-IMPORTS = ('/sp/setup/get_general.py/get_general.py') ;
+IMPORTS = ('/setup/get_general.py');
 
 
-GRANT USAGE ON PROCEDURE core.get_general ( sql_code string) TO APPLICATION ROLE app_public;
+-- GRANT USAGE ON PROCEDURE core.get_general ( sql_code string) TO APPLICATION ROLE app_public;
+GRANT USAGE ON PROCEDURE core.get_general(STRING) TO APPLICATION ROLE app_public;

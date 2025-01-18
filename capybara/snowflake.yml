@@ -11,6 +11,8 @@ entities:
         dest: ./
       - src: sp/prep/*
         dest: prep/
+      - src: sp/setup/*
+        dest: setup/
     
   app:
     type: application
