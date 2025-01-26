@@ -128,7 +128,7 @@ def get_data_api(session, child_sp, sql_code):
             response = requests.post(url, headers=headers, data=json.dumps(data))
             response_data = response.json()
             records = response_data[root]
-            next_cursor = response_data.get('next_cursor')  # Update the cursor
+            next_cursor = response_data.get('next_cursor') 
             
             if not records:
                 break
@@ -156,8 +156,4 @@ def get_data_api(session, child_sp, sql_code):
             time.sleep(2)
     else:
         return 'Pagination Type Not Found'
-
-    # Insert run configurations
-    # insert_run_configs(connection_name, data)
-    
     return 'Done'
